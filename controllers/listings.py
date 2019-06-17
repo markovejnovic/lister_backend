@@ -22,7 +22,7 @@ A listing JSON object should appear as such:
 
 def get_available():
     """Returns the available listings"""
-    STMT = "SELECT * FROM listings_default_active"
+    STMT = "SELECT * FROM listings_default_active_view"
 
     listings = []
 
@@ -58,7 +58,7 @@ def get_available():
 
 def get_all():
     """Returns all listings"""
-    STMT = "SELECT * FROM listings_default"
+    STMT = "SELECT * FROM listings_default_view"
 
     listings = []
 
@@ -93,7 +93,7 @@ def get_all():
 
 def get_single(listing_id):
     """Returns a single listing"""
-    STMT = "SELECT * FROM listings_full WHERE id = %s"
+    STMT = "SELECT * FROM listings_full_view WHERE id = %s"
 
     conn = database.get_conn()
     cursor = conn.cursor()

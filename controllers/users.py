@@ -37,7 +37,7 @@ def get_all():
                     "wechat": r[3],
                     "wechat_qr": r[4],
                     "messenger": r[5],
-                    "whatsapp": r[6]
+                    "phone": r[6]
                 }
         )
 

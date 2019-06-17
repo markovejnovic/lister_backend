@@ -6,6 +6,8 @@ class Root(Resource):
         """Returns the list of supported endpoints of the REST api"""
         return {
                 "listings": "https://" + config.get_root() + "/listings?{all}",
-                "users": "https://" + config.get_root() + "/users"
+                "users": "https://" + config.get_root() + "/users",
+                "auth": "https://" + config.get_root() + "/auth",
+                "register": "https://" + config.get_root() + "/register"
         }
 

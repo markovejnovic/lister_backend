@@ -2,7 +2,7 @@ from flask import Flask
 from flask_restful import Api
 from flask_jwt_extended import JWTManager
 
-from resources import Root, Listings, Users, Auth, Listing
+from resources import Root, Listings, Users, Auth, Listing, Register
 
 app = Flask(__name__)
 
@@ -16,6 +16,7 @@ api.add_resource(Auth, '/auth')
 api.add_resource(Listings, '/listings')
 api.add_resource(Listing, '/listings/<int:listing_id>')
 api.add_resource(Users, '/users')
+api.add_resource(Register, '/register')
 
 @app.after_request
 def after_request(response):
