@@ -2,7 +2,8 @@ from flask import Flask
 from flask_restful import Api
 from flask_jwt_extended import JWTManager
 
-from resources import Root, Listings, Users, Auth, Listing, Register
+from resources import Root, Listings, Users, Auth, Listing, Register, \
+	Categories, Category
 
 app = Flask(__name__)
 
@@ -17,6 +18,8 @@ api.add_resource(Listings, '/listings')
 api.add_resource(Listing, '/listings/<int:listing_id>')
 api.add_resource(Users, '/users')
 api.add_resource(Register, '/register')
+api.add_resource(Categories, '/categories')
+api.add_resource(Category, '/categories/<int:category_id>')
 
 @app.after_request
 def after_request(response):

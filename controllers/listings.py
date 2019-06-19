@@ -46,9 +46,45 @@ def get_available():
                     "descriptionBrief": r[3],
                     "descriptionLong": r[4],
                     "isActive": True,
-                    "price": str(r[5]) + config.get_currency_short(),
+                    "price": r[6],
                     "images": imgs,
-                    "categoryId": r[6]
+                    "categoryId": r[5]
+                }
+        )
+
+    conn.close()
+
+    return listings
+
+def get_available_q(q):
+    """Returns the available listings with query"""
+    STMT = "SELECT * FROM listings_default_active_view WHERE SOUNDEX(title) = SOUNDEX(%s);"
+
+    listings = []
+
+    conn = database.get_conn()
+    cursor = conn.cursor()
+    cursor.execute(STMT, (q, ))
+    result = cursor.fetchall()
+    cursor.close()
+
+    for r in result:
+        cursor = conn.cursor()
+        cursor.execute("SELECT url FROM listing_images WHERE listing_id = %s",
+                (r[0], ))
+        imgs = [i[0] for i in cursor.fetchall()]
+        cursor.close()
+        listings.append(
+                {
+                    "id": r[0],
+                    "title": r[1],
+                    "userId": r[2],
+                    "descriptionBrief": r[3],
+                    "descriptionLong": r[4],
+                    "isActive": True,
+                    "price": r[6],
+                    "images": imgs,
+                    "categoryId": r[5]
                 }
         )
 
@@ -81,7 +117,7 @@ def get_all():
                     "descriptionBrief": r[3],
                     "descriptionLong": r[4],
                     "isActive": r[5],
-                    "price": str(r[6]) + config.get_currency_short(),
+                    "price": r[6],
                     "images": imgs,
                     "categoryId": r[7]
                 }
@@ -115,7 +151,7 @@ def get_single(listing_id):
         "descriptionBrief": r[3],
         "descriptionLong": r[4],
         "isActive": r[5],
-        "price": str(r[6]) + config.get_currency_short(),
+        "price": r[6],
         "categoryId": r[7],
         "dateTimePosted": r[8].strftime('%Y-%m-%d %H:%M:%S'),
         "views": r[9],

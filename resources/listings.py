@@ -19,6 +19,8 @@ class Listings(Resource):
         if 'all' in request.args and request.args['all'] != 0 and \
                 request.args['all'].lower() != 'false':
             return listings.get_all()
+        if 'q' in request.args:
+            return listings.get_available_q(request.args['q'])
         else:
             return listings.get_available()
 
